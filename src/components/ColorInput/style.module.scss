@@ -1,0 +1,36 @@
+.input__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  text-align: center;
+  width: 15rem;
+  height: 3rem;
+  background-color: var(--color-light);
+  border-radius: 5px;
+
+  .color__input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+
+  .color__label {
+    display: inline-block;
+    padding: 12px 12px;
+    background-color: #000;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .name__input {
+    text-align: center;
+    background-color: var(--color-light);
+    max-width: 80%;
+    height: 2.2rem;
+  }
+}

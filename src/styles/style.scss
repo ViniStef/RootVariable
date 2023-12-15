@@ -1,10 +1,11 @@
 :root {
-    --ff-primary: 'Montserrat', sans-serif;
+    --ff-primary: 'Inter', sans-serif;
 
-    --color-light: #eeeeee;
+    --color-light: #f7f6f6;
     --color-lighter: #fff;
     --color-dark: #111111;
     --color-darker: #000;
+    --color-gray-50: #9e9e9e;
     --color-gray-100: #424242;
     --color-gray-200: #2e2e2e;
     --color-gray-300: #1f1f1f;
@@ -15,13 +16,22 @@
     --color-primary-400: #1f706c;
 
 
-    --fw-light: 200;
-    --fw-regular: 400;
-    --fw-bold: 500;
+    --fw-light: 400;
+    --fw-regular: 500;
+    --fw-bold: 700;
 
     --fs-sm: 1.1rem;
     --fs-md: 1.3rem;
     --fs-lg: 1.5rem; 
+}
+
+@media (max-width: 425px) {
+    :root {
+        --fs-sm: 1rem;
+        --fs-md: 1.1rem;
+        --fs-lg: 1.3rem;
+    }
+
 }
 
 *,
@@ -37,16 +47,20 @@ body {
     font-family: var(--ff-primary);
 }
 
-button {
-    cursor: pointer;
-    background-color: transparent;
-    border: none;
-    outline: none;
+
+.main__container {
+    width: 100%;
+    height: 100dvh;
+    position: relative;
+    margin: 0 auto;
+
 }
 
-input {
-    border: none;
-    outline: none;
-    cursor: pointer;
-    
+.content__container {
+    max-width: 80rem;
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 2rem;
 }
+
+
