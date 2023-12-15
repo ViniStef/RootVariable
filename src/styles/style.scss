@@ -1,0 +1,52 @@
+:root {
+    --ff-primary: 'Montserrat', sans-serif;
+
+    --color-light: #eeeeee;
+    --color-lighter: #fff;
+    --color-dark: #111111;
+    --color-darker: #000;
+    --color-gray-100: #424242;
+    --color-gray-200: #2e2e2e;
+    --color-gray-300: #1f1f1f;
+    --color-gray-400: #0d0d0d;
+    --color-primary-100: #33b3ae;
+    --color-primary-200: #2c9c97;
+    --color-primary-300: #258580;
+    --color-primary-400: #1f706c;
+
+
+    --fw-light: 200;
+    --fw-regular: 400;
+    --fw-bold: 500;
+
+    --fs-sm: 1.1rem;
+    --fs-md: 1.3rem;
+    --fs-lg: 1.5rem; 
+}
+
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    font: unset;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--ff-primary);
+}
+
+button {
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+input {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    
+}
