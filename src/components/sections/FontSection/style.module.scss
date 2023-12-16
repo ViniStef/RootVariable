@@ -28,13 +28,15 @@
         border-bottom-right-radius: 0;
         border-top-right-radius: 0;
         height: inherit;
+        background-color: var(--color-light);
     }
 
     .font__button {
         width: 40%;
         color: var(--color-light);
-        background-color: var(--color-gray-100);
+        background-color: var(--color-dark);
         height: inherit;
+        border: 1px solid var(--color-dark);
         // padding: 15px;
         border-radius: 10px;
         border-top-left-radius: 0;

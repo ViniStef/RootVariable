@@ -21,11 +21,16 @@
         .darkMode__button {
             width: 2rem;
             height: 2rem;
-            background-color: var(--color-gray-200);
+            background-color: var(--color-dark);
             border-radius: 50%;
-            color: var(--color-lighter);
             // border: 3px solid var(--color-primary-300);
+
+            svg {
+                color: var(--color-light);
+                fill: var(--color-light);
+            }
         }
+
     }
 }
 
