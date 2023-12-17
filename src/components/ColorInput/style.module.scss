@@ -1,12 +1,17 @@
 .input__item {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
   text-align: center;
-  width: 15rem;
+  width: 17rem;
   height: 3rem;
   background-color: var(--color-light);
   border-radius: 5px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  position: relative;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
 
   .color__input {
     position: absolute;
@@ -20,17 +25,60 @@
   }
 
   .color__label {
+    position: relative;
+    left: 10px;
     display: inline-block;
     padding: 12px 12px;
-    background-color: #000;
+    background-color: var(--color-dark);
     border-radius: 50%;
+    box-shadow: 0px 0px 5px var(--color-gray-50);
     cursor: pointer;
   }
 
   .name__input {
-    text-align: center;
+    text-align: start;
     background-color: var(--color-light);
-    max-width: 80%;
+    max-width: 70%;
     height: 2.2rem;
+    padding-left: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+
+  .exclude__button {
+    border-left: 2px solid var(--color-lighter);
+    height: 100%;
+    background-color: var(--color-light);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      width: 2rem;
+      height: 2rem;
+      cursor: pointer;
+      fill: var(--color-gray-100);
+    }
+  }
+
+}
+
+.add__button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // left: 1rem;
+  width: 17rem;
+  height: 3rem;
+  background-color: var(--color-light);
+  border-radius: 5px;
+
+  svg {
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
   }
 }

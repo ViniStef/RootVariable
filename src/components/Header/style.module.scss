@@ -6,7 +6,8 @@
     align-items: center;
     justify-content: center;
     position: relative;
-
+    background-color: var(--color-header);
+    // box-shadow: .5px .5px 10px .5px var(--color-primary-100);
 
     .content__container {
         width: 100%;
@@ -16,15 +17,15 @@
         align-items: center;
         padding-inline: .625rem;
         justify-content: space-between;
-        // border-bottom: 2px solid var(--color-primary-100);
+        
 
         .darkMode__button {
+            box-shadow: 0px 0px 10px var(--color-dark);
             width: 2rem;
             height: 2rem;
             background-color: var(--color-dark);
             border-radius: 50%;
-            // border: 3px solid var(--color-primary-300);
-
+            
             svg {
                 color: var(--color-light);
                 fill: var(--color-light);
