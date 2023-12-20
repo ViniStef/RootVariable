@@ -2,9 +2,9 @@ import style from "./style.module.scss";
 import { useState } from "react";
 import { ColorInput } from "../../ColorInput";
 
-export const DefaultColorSection = ( { children, colorPrio, startColor, customAmount=100} ) => {
+export const DefaultColorSection = ( { children, setValues, colorPrio, startColor, customAmount=100} ) => {
     const [primaryAmount, setPrimaryAmount] = useState(5);
-    let inputsCreated = customAmount;
+    let colorWeight = customAmount;
     let colorName = colorPrio
     
     
@@ -12,16 +12,16 @@ export const DefaultColorSection = ( { children, colorPrio, startColor, customAm
       setPrimaryAmount((prevValue) => prevValue + 1)
       if (typeof colorPrio !== "string") {
         colorName = colorPrio[primaryAmount - 1] || "accent"
-        inputsCreated = ""
+        colorWeight = ""
     } else {
-        inputsCreated ? inputsCreated += 100 : null
+        colorWeight ? colorWeight += 100 : null
     }
       setInputItemsArray((prevArray) => {
         
-        const newVal = <ColorInput key={crypto.randomUUID()} id={crypto.randomUUID()} addVariableItem={addVariableItem} colorPriority={colorName} colorWeight={inputsCreated ? `-${inputsCreated}` : ""} isLast={true} />
+        const newVal = <ColorInput key={crypto.randomUUID()} setValues={setValues} id={crypto.randomUUID()} addVariableItem={addVariableItem} colorPriority={colorName} colorWeight={colorWeight ? `-${colorWeight}` : ""} isLast={true} />
         
         let copyArray = [...prevArray]
-        copyArray[copyArray.length - 1] = <ColorInput key={crypto.randomUUID()} id={crypto.randomUUID()} removeVariableItem={removeVariableItem} colorPriority={colorName} colorWeight={inputsCreated ? `-${inputsCreated}` : ""} />
+        copyArray[copyArray.length - 1] = <ColorInput key={crypto.randomUUID()} setValues={setValues} id={crypto.randomUUID()} removeVariableItem={removeVariableItem} colorPriority={colorName} colorWeight={colorWeight ? `-${colorWeight}` : ""} />
         copyArray.push(newVal)
         return copyArray
     })
@@ -38,16 +38,16 @@ export const DefaultColorSection = ( { children, colorPrio, startColor, customAm
       Array.from({length: primaryAmount}, (_, index) => {
         if (typeof colorPrio !== "string") {
             colorName = colorPrio[index] || "accent"
-            inputsCreated = ""
+            colorWeight = ""
         } else {
         } 
         if (index === primaryAmount - 1) {
-            return <ColorInput key={crypto.randomUUID()} startColor={startColor[index]} id={crypto.randomUUID()} addVariableItem={addVariableItem} colorPriority={colorName} colorWeight={inputsCreated ? `-${inputsCreated}` : ""} isLast={true} />
+            return <ColorInput key={crypto.randomUUID()} setValues={setValues} startColor={startColor[index]} id={crypto.randomUUID()} addVariableItem={addVariableItem} colorPriority={colorName} colorWeight={colorWeight ? `-${colorWeight}` : ""} isLast={true} />
         } else {
             if (index !== 0) {
-                inputsCreated ? inputsCreated += 100 : null
+                colorWeight ? colorWeight += 100 : null
             }
-            return <ColorInput key={crypto.randomUUID()} startColor={startColor[index]} id={crypto.randomUUID()} removeVariableItem={removeVariableItem} colorPriority={colorName} colorWeight={inputsCreated ? `-${inputsCreated}` : ""} />
+            return <ColorInput key={crypto.randomUUID()} setValues={setValues} startColor={startColor[index]} id={crypto.randomUUID()} removeVariableItem={removeVariableItem} colorPriority={colorName} colorWeight={colorWeight ? `-${colorWeight}` : ""} />
         }
       }
       )

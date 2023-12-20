@@ -1,4 +1,5 @@
 .font__section {
+  
   width: 100%;
   max-width: 80rem;
   height: 4rem;
@@ -7,19 +8,20 @@
   align-items: center;
   justify-content: start;
   // margin-top: clamp(0.1rem, 0.5vw, 1.5rem);
-  padding-bottom: 7rem;
+  margin-bottom: 9rem;
   position: relative;
 
   .header__container {
     display: flex;
     width: 100%;
     justify-content: space-between;
-    padding-block: 7px;
+    align-items: center;
+    padding-block: 15px;
 
     h1 {
       align-self: flex-start;
       margin-left: 10px;
-      padding-bottom: 5px;
+      // padding-bottom: 5px;
     }
 
     .btnSize__container {
@@ -43,8 +45,8 @@
         text-align: center;
 
         svg {
-          width: clamp(0.8rem, 3vw, 1.2rem);
-          height: clamp(0.8rem, 3vw, 1.2rem);
+          width: clamp(0.9rem, 3vw, 1.2rem);
+          height: clamp(0.9rem, 3vw, 1.2rem);
         }
       }
     }
@@ -89,11 +91,27 @@
       border-right: 1px solid var(--color-gray-50);
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+
+      svg {
+        fill: var(--color-gray-400);
+      }
     }
     .btnSize__px {
       border-left: 1px solid var(--color-gray-50);
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+
+      svg {
+        fill: var(--color-gray-400);
+      }
     }
   }
 
@@ -104,6 +122,10 @@
     width: 100%;
     position: relative;
     padding-inline: 10px;
+
+    .invalid__value {
+      border-color: var(--color-invalid);
+    }
   }
 
   .font__input {
@@ -131,6 +153,28 @@
     border-bottom-left-radius: 0;
     position: absolute;
     right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    p {
+      font-size: inherit;
+      color: inherit;
+      color: var(--color-light);
+    }
+
+    svg {
+      width: 2rem;
+      height: 2rem;
+      fill: var(--color-light);
+    }
   }
 }
 

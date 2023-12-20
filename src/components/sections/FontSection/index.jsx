@@ -1,8 +1,89 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import style from "./style.module.scss";
 
-export const FontSection = () => {
-  let [isOpen, setIsOpen] = useState(false);
+export const FontSection = ({ copyVariables, setFontValues }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [buttonText, setButtonText] = useState("Copy to Clipboard");
+  const [sizePreference, setSizePreference] = useState("px");
+  const [inputValue, setInputValue] = useState("");
+  const [validInput, setValidInput] = useState(true);
+  const [currentFonts, setCurrentFonts] = useState([])
+
+  const copyTimeout = () => {
+    setButtonText(
+      <div>
+        <p>Copied</p>{" "}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="23"
+          height="23"
+          fill="currentColor"
+          className="bi bi-check-lg"
+          viewBox="0 0 16 16"
+        >
+          <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022" />
+        </svg>
+      </div>
+    );
+    setTimeout(() => {
+      setButtonText("Copy to Clipboard");
+    }, 1000 * 3);
+  };
+
+  const handleFonts = (event) => {
+    if (event.target.value) {
+      if (validateInput(event)) {
+        setValidInput(true);
+        let fonts = event.target.value.split(",");
+        console.log(fonts)
+        setCurrentFonts(fonts.map((font) => font.replace(/\s/g, "")))
+      }
+    }
+  };
+
+  useEffect(() => {
+    setFontValues((prevValue) => {
+      let copyArray = [...prevValue];
+      console.log(currentFonts)
+      for (let i in currentFonts) {
+        console.log(i)
+        if (currentFonts[i] !== "") {
+          if (currentFonts[i].endsWith(".")) {
+            currentFonts[i] = currentFonts[i] + "0"
+          }
+          if (i >= copyArray.length) {
+            copyArray = [...copyArray,{ name: [`--fs-${parseInt(i)+1}`], size: currentFonts[i] }]
+          } else {
+            copyArray[i].size = currentFonts[i];
+          }
+        } else {
+          console.log("Something went wrong");
+        }
+      }
+      return copyArray;
+    });
+  },[currentFonts])
+
+  const validateInput = (e) => {
+    if (!e.target.value) {
+      setValidInput(true);
+      return true;
+    } else {
+      const regex = /^\s*(\d+(\.\d*)?|\.\d+)(,\s*(\d+(\.\d*)?|\.\d+))*\s*,?$/;
+      if (regex.test(e.target.value)) {
+        setValidInput(true);
+        return true;
+      } else {
+        setValidInput(false);
+        return false;
+      }
+    }
+  };
+
+  const handleInput = (e) => {
+    const sanitizedValue = e.target.value.replace(/[^\d ,.]/g, "");
+    setInputValue(sanitizedValue);
+  };
 
   return (
     <section className={style.font__section}>
@@ -44,18 +125,75 @@ export const FontSection = () => {
       </div>
       {isOpen ? (
         <div className={style.choice__container}>
-          <button className={style.btnSize__rem}>rem</button>
+          <button
+            onClick={(e) => setSizePreference("rem")}
+            className={style.btnSize__rem}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              fill="currentColor"
+              class="bi bi-arrow-repeat"
+              viewBox="0 0 16 16"
+            >
+              <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z" />
+              <path
+                fill-rule="evenodd"
+                d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z"
+              />
+            </svg>
+            <span style={{ fontStyle: "italic" }}>rem</span>
+          </button>
           {/* <hr className={style.choice__line} /> */}
-          <button className={style.btnSize__px}>px</button>
+          <button
+            onClick={(e) => setSizePreference("px")}
+            className={style.btnSize__px}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              fill="currentColor"
+              class="bi bi-arrow-repeat"
+              viewBox="0 0 16 16"
+            >
+              <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z" />
+              <path
+                fill-rule="evenodd"
+                d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z"
+              />
+            </svg>
+            <span style={{ fontStyle: "italic" }}>px</span>
+          </button>
         </div>
       ) : null}
       <div className={style.font__container}>
         <input
-          className={style.font__input}
+          onKeyUp={(e) => validateInput(e)}
+          onBlur={(e) => validateInput(e)}
+          onFocus={(e) => validateInput(e)}
+          onInput={(e) => handleInput(e)}
+          onChange={(e) => handleFonts(e)}
+          className={`${style.font__input} ${
+            validInput ? null : style.invalid__value
+          }`}
+          value={inputValue}
           type="text"
-          placeholder="Ex: 24, 36, 48, 62"
+          placeholder={
+            sizePreference === "px"
+              ? "Ex: 24, 36, 48, 62"
+              : "Ex: 1, 1.25, 2.2, 2.75"
+          }
         />
-        <button className={style.font__button}>Copy to Clipboard</button>
+        <button
+          onClick={(e) => {
+            copyVariables(sizePreference), copyTimeout();
+          }}
+          className={style.font__button}
+        >
+          {buttonText}
+        </button>
       </div>
     </section>
   );

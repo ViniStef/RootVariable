@@ -2,10 +2,10 @@ import { useState } from "react";
 import { ColorInput } from "../../ColorInput";
 import { DefaultColorSection } from "../DefaultColorSection";
 
-export const SecondarySection = () => {
+export const SecondarySection = ({setSecondaryValues}) => {
 
   return (
-    <DefaultColorSection colorPrio={"secondary"} startColor={["#424242","#3d3d3d","#313131","#242424"]}>
+    <DefaultColorSection setValues={setSecondaryValues} colorPrio={"secondary"} startColor={["#424242","#3d3d3d","#313131","#242424"]}>
 
       {/* <ColorInput colorPriority={"secondary"} colorWeight={100} />
       <ColorInput colorPriority={"secondary"} colorWeight={200} />
