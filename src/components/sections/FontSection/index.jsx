@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import style from "./style.module.scss";
 
 export const FontSection = ({ copyVariables, setFontValues }) => {
@@ -7,7 +7,8 @@ export const FontSection = ({ copyVariables, setFontValues }) => {
   const [sizePreference, setSizePreference] = useState("px");
   const [inputValue, setInputValue] = useState("");
   const [validInput, setValidInput] = useState(true);
-  const [currentFonts, setCurrentFonts] = useState([])
+  const [currentFonts, setCurrentFonts] = useState([]);
+  const [isButtonFocused, setButtonFocused] = useState(false);
 
   const copyTimeout = () => {
     setButtonText(
@@ -35,34 +36,75 @@ export const FontSection = ({ copyVariables, setFontValues }) => {
       if (validateInput(event)) {
         setValidInput(true);
         let fonts = event.target.value.split(",");
-        console.log(fonts)
-        setCurrentFonts(fonts.map((font) => font.replace(/\s/g, "")))
+        setCurrentFonts(fonts.map((font) => font.replace(/\s/g, "")));
       }
     }
   };
 
   useEffect(() => {
+    setInputValue("");
+  },[])
+
+  useEffect(() => {
+    let newSizes = []
+    if (inputValue) {
+      setFontValues((prevValues) => {
+        let copyArray = [...prevValues];
+          if (sizePreference === "rem") {
+            for (let i in copyArray) {
+              let formatValue = parseFloat(copyArray[i].size) / 16;
+              copyArray[i].size = formatValue
+              if (i == 0) {
+                newSizes.push(formatValue);
+              } else {
+                newSizes.push(" " + formatValue);
+              }
+              
+            }
+          } else {
+            for (let i in copyArray) {
+              let formatValue = parseFloat(copyArray[i].size) * 16;
+              copyArray[i].size = formatValue
+              if (i == 0) {
+                newSizes.push(formatValue);
+              } else {
+                newSizes.push(" " + formatValue);
+              }
+            }
+          }
+        
+  
+        
+        return copyArray;
+      });
+      setInputValue(newSizes)
+    }
+    
+  }, [sizePreference]);
+
+  useEffect(() => {
     setFontValues((prevValue) => {
       let copyArray = [...prevValue];
-      console.log(currentFonts)
       for (let i in currentFonts) {
-        console.log(i)
         if (currentFonts[i] !== "") {
           if (currentFonts[i].endsWith(".")) {
-            currentFonts[i] = currentFonts[i] + "0"
+            currentFonts[i] = currentFonts[i] + "0";
           }
           if (i >= copyArray.length) {
-            copyArray = [...copyArray,{ name: [`--fs-${parseInt(i)+1}`], size: currentFonts[i] }]
+            copyArray = [
+              ...copyArray,
+              { name: [`--fs-${parseInt(i) + 1}`], size: currentFonts[i] },
+            ];
           } else {
             copyArray[i].size = currentFonts[i];
           }
         } else {
-          console.log("Something went wrong");
+          // Happens when the user is typing a comma, for example.
         }
       }
       return copyArray;
     });
-  },[currentFonts])
+  }, [currentFonts]);
 
   const validateInput = (e) => {
     if (!e.target.value) {
@@ -126,7 +168,9 @@ export const FontSection = ({ copyVariables, setFontValues }) => {
       {isOpen ? (
         <div className={style.choice__container}>
           <button
-            onClick={(e) => setSizePreference("rem")}
+            onClick={(e) => {setSizePreference("rem"), setButtonFocused(true)}}
+            onFocus={() => setButtonFocused(true)}
+            style={{ opacity: isButtonFocused ? '1' : '.5' }}
             className={style.btnSize__rem}
           >
             <svg
@@ -134,12 +178,12 @@ export const FontSection = ({ copyVariables, setFontValues }) => {
               width="20"
               height="20"
               fill="currentColor"
-              class="bi bi-arrow-repeat"
+              className="bi bi-arrow-repeat"
               viewBox="0 0 16 16"
             >
               <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z" />
               <path
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z"
               />
             </svg>
@@ -147,7 +191,9 @@ export const FontSection = ({ copyVariables, setFontValues }) => {
           </button>
           {/* <hr className={style.choice__line} /> */}
           <button
-            onClick={(e) => setSizePreference("px")}
+            onClick={(e) => {setSizePreference("px"), setButtonFocused(false)}}
+            onFocus={() => setButtonFocused(false)}
+            style={{ opacity: isButtonFocused ? '.5' : '1' }}
             className={style.btnSize__px}
           >
             <svg
@@ -155,12 +201,12 @@ export const FontSection = ({ copyVariables, setFontValues }) => {
               width="20"
               height="20"
               fill="currentColor"
-              class="bi bi-arrow-repeat"
+              className="bi bi-arrow-repeat"
               viewBox="0 0 16 16"
             >
               <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z" />
               <path
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z"
               />
             </svg>
@@ -183,7 +229,7 @@ export const FontSection = ({ copyVariables, setFontValues }) => {
           placeholder={
             sizePreference === "px"
               ? "Ex: 24, 36, 48, 62"
-              : "Ex: 1, 1.25, 2.2, 2.75"
+              : "Ex: 1.5, 2.25, 3, 3.875"
           }
         />
         <button

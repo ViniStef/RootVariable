@@ -8,29 +8,29 @@ import { useEffect, useLayoutEffect, useState } from "react";
 import { Footer } from "../Footer";
 
 export const HomePage = () => {
-  const [primaryValues, setPrimaryValues] = useState([])
-  const [secondaryValues, setSecondaryValues] = useState([])
-  const [accentValues, setAccentValues] = useState([])
-  const [fontValues, setFontValues] = useState([{name: "--fs-sm", size: "16"},{name: "--fs-md", size: "22"}, {name: "--fs-lg", size: "28"}, {name: "--fs-xl", size: "36"}])
+  const [primaryValues, setPrimaryValues] = useState([]);
+  const [secondaryValues, setSecondaryValues] = useState([]);
+  const [accentValues, setAccentValues] = useState([]);
+  const [fontValues, setFontValues] = useState([
+    { name: "--fs-sm", size: "16" },
+    { name: "--fs-md", size: "22" },
+    { name: "--fs-lg", size: "28" },
+    { name: "--fs-xl", size: "36" },
+  ]);
 
   const copyVariables = (sizePreference) => {
-    let allVariables = ""
-    for (let i = 0; i < primaryValues.length; i++) {
-      allVariables += (`${primaryValues[i].name}: ${primaryValues[i].color}; \n`)
-    }
-    for (let i = 0; i < secondaryValues.length; i++) {
-      allVariables += (`${secondaryValues[i].name}: ${secondaryValues[i].color}; \n`)
-    }
-    for (let i = 0; i < accentValues.length; i++) {
-      allVariables += (`${accentValues[i].name}: ${accentValues[i].color}; \n`)
-    }
-    allVariables += "\n"
-    for (let i = 0; i < fontValues.length; i++) {
-      console.log(fontValues[i])
-      allVariables += (`${fontValues[i].name}: ${fontValues[i].size}${sizePreference}; \n`)
-    }
-    navigator.clipboard.writeText(allVariables)
-  }
+    let allVariables = [...primaryValues, ...secondaryValues, ...accentValues]
+      .map((variable) => `${variable.name}: ${variable.color};`)
+      .join("\n");
+
+    const fontVariables = fontValues
+      .map((variable) => `${variable.name}: ${variable.size}${sizePreference};`)
+      .join("\n");
+
+    const clipboardTxt = `${allVariables}\n${fontVariables}`;
+
+    navigator.clipboard.writeText(clipboardTxt);
+  };
 
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem("@RootVariable:Theme")
@@ -40,11 +40,9 @@ export const HomePage = () => {
 
   useLayoutEffect(() => {
     if (theme === "dark") {
-      document.documentElement.classList.add("dark");
+      document.documentElement.classList.add("light");
     } else {
-      document.documentElement.classList.remove("dark");
-
-      console.log("Local storage is empty.");
+      document.documentElement.classList.remove("light");
     }
   }, []);
 
@@ -53,7 +51,7 @@ export const HomePage = () => {
   }, [theme]);
 
   const toggleDarkMode = () => {
-    const toggle = document.documentElement.classList.toggle("dark");
+    const toggle = document.documentElement.classList.toggle("light");
     if (toggle) {
       setTheme("dark");
     } else {
@@ -71,7 +69,10 @@ export const HomePage = () => {
 
         <AccentSection theme={theme} setAccentValues={setAccentValues} />
 
-        <FontSection copyVariables={copyVariables} setFontValues={setFontValues} />
+        <FontSection
+          copyVariables={copyVariables}
+          setFontValues={setFontValues}
+        />
       </main>
       <Footer />
     </div>

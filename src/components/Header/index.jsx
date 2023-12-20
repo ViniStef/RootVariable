@@ -4,7 +4,7 @@ import style from "./style.module.scss";
 export const Header = ( {theme, toggleDarkMode }) => {
 
 
-  const themeHold = theme === "dark";
+  const themeHold = theme === "light";
 
   return (
     <div className={style.header__container}>

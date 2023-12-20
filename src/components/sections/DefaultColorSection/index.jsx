@@ -52,8 +52,6 @@ export const DefaultColorSection = ( { children, setValues, colorPrio, startColo
       }
       )
     );
-    
-    console.log(inputItemsArray)
 
     return (
 
