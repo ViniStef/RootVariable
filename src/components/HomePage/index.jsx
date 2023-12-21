@@ -35,11 +35,11 @@ export const HomePage = () => {
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem("@RootVariable:Theme")
       ? JSON.parse(localStorage.getItem("@RootVariable:Theme"))
-      : {};
+      : "dark";
   });
 
   useLayoutEffect(() => {
-    if (theme === "dark") {
+    if (theme === "light") {
       document.documentElement.classList.add("light");
     } else {
       document.documentElement.classList.remove("light");
@@ -53,9 +53,9 @@ export const HomePage = () => {
   const toggleDarkMode = () => {
     const toggle = document.documentElement.classList.toggle("light");
     if (toggle) {
-      setTheme("dark");
-    } else {
       setTheme("light");
+    } else {
+      setTheme("dark");
     }
   };
 
