@@ -23,7 +23,6 @@ export const DefaultColorSection = ( { children, setValues, colorPrio, startColo
         const newVal = <ColorInput key={crypto.randomUUID()} setValues={setValues} id={crypto.randomUUID()} addVariableItem={addVariableItem} colorPriority={colorName} colorWeight={colorWeight ? `-${colorWeight}` : ""} isLast={true} />
         
         let copyArray = [...prevArray]
-        console.log(copyArray)
         copyArray[copyArray.length - 1] = <ColorInput key={crypto.randomUUID()} setValues={setValues} id={crypto.randomUUID()} removeVariableItem={removeVariableItem} colorPriority={colorName} colorWeight={colorWeight ? `-${colorWeight}` : ""} />
         copyArray.push(newVal)
         return copyArray
