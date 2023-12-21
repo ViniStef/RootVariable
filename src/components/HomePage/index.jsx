@@ -27,7 +27,7 @@ export const HomePage = () => {
       .map((variable) => `${variable.name}: ${variable.size}${sizePreference};`)
       .join("\n");
 
-    const clipboardTxt = `${allVariables}\n${fontVariables}`;
+    const clipboardTxt = `${allVariables}\n\n${fontVariables}`;
 
     navigator.clipboard.writeText(clipboardTxt);
   };

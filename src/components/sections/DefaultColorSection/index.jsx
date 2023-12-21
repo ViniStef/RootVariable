@@ -4,6 +4,7 @@ import { ColorInput } from "../../ColorInput";
 
 export const DefaultColorSection = ( { children, setValues, colorPrio, startColor, customAmount=100} ) => {
     const [primaryAmount, setPrimaryAmount] = useState(5);
+    let accent = 1
     let colorWeight = customAmount;
     let colorName = colorPrio
     
@@ -12,15 +13,17 @@ export const DefaultColorSection = ( { children, setValues, colorPrio, startColo
       setPrimaryAmount((prevValue) => prevValue + 1)
       if (typeof colorPrio !== "string") {
         colorName = colorPrio[primaryAmount - 1] || "accent"
-        colorWeight = ""
-    } else {
-        colorWeight ? colorWeight += 100 : null
-    }
+        colorWeight = accent
+        accent ++;
+      } else {
+          colorWeight ? colorWeight += 100 : null
+      }
       setInputItemsArray((prevArray) => {
         
         const newVal = <ColorInput key={crypto.randomUUID()} setValues={setValues} id={crypto.randomUUID()} addVariableItem={addVariableItem} colorPriority={colorName} colorWeight={colorWeight ? `-${colorWeight}` : ""} isLast={true} />
         
         let copyArray = [...prevArray]
+        console.log(copyArray)
         copyArray[copyArray.length - 1] = <ColorInput key={crypto.randomUUID()} setValues={setValues} id={crypto.randomUUID()} removeVariableItem={removeVariableItem} colorPriority={colorName} colorWeight={colorWeight ? `-${colorWeight}` : ""} />
         copyArray.push(newVal)
         return copyArray

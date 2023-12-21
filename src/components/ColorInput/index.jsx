@@ -80,11 +80,12 @@ export const ColorInput = ({
       setValues((prevValue) => prevValue.filter((item) => item.id !== id));
     };
   }, []);
-
+  let inputID = crypto.randomUUID()
   return !isLast ? (
+    
     <li key={id} className={style.input__item}>
       <label
-        htmlFor={`${colorPriority}-${colorWeight}`}
+        htmlFor={inputID}
         className={style.color__label}
         style={{ backgroundColor: selectedColor }}
       ></label>
@@ -94,7 +95,7 @@ export const ColorInput = ({
         className={style.color__input}
         type="color"
         name=""
-        id={`${colorPriority}-${colorWeight}`}
+        id={inputID}
       />
       <input value={inputValue} onInput={handleInput} onChange={handleNameChange}
         className={style.name__input}
