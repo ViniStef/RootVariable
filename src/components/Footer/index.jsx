@@ -11,7 +11,7 @@ export const Footer = () => {
           <a target="_blank" href="https://github.com/ViniStef">
             <img src={gitHubIcon} alt="GitHub Icon" />
           </a>
-          <a target="_blank" href="www.linkedin.com/in/vinicius-steflitsch-b19a47259">
+          <a target="_blank" href="https://linkedin.com/in/vinicius-steflitsch-b19a47259">
             <img src={linkedinIcon} alt="LinkedIn Icon" />
           </a>
         </div>
