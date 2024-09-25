@@ -1,5 +1,3 @@
-import { useState } from "react";
-import { ColorInput } from "../../ColorInput";
 import { DefaultColorSection } from "../DefaultColorSection";
 
 export const SecondarySection = ({setSecondaryValues}) => {

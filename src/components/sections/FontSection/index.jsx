@@ -98,9 +98,7 @@ export const FontSection = ({ copyVariables, setFontValues }) => {
           } else {
             copyArray[i].size = currentFonts[i];
           }
-        } else {
-          // Happens when the user is typing a comma, for example.
-        }
+        } 
       }
       return copyArray;
     });
@@ -189,7 +187,6 @@ export const FontSection = ({ copyVariables, setFontValues }) => {
             </svg>
             <span style={{ fontStyle: "italic" }}>rem</span>
           </button>
-          {/* <hr className={style.choice__line} /> */}
           <button
             onClick={(e) => {setSizePreference("px"), setButtonFocused(false)}}
             onFocus={() => setButtonFocused(false)}

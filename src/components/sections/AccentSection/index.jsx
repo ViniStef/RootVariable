@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { ColorInput } from "../../ColorInput";
+import { useState } from "react";
 import { DefaultColorSection } from "../DefaultColorSection";
 
 
