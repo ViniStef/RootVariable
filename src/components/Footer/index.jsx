@@ -8,10 +8,10 @@ export const Footer = () => {
       <div className={style.content__container}>
         <p>Check out my other projects <span>:)</span></p>
         <div className={style.icons__container}>
-          <a href="https://github.com/ViniStef">
+          <a target="_blank" href="https://github.com/ViniStef">
             <img src={gitHubIcon} alt="GitHub Icon" />
           </a>
-          <a href="www.linkedin.com/in/vinicius-steflitsch-b19a47259">
+          <a target="_blank" href="www.linkedin.com/in/vinicius-steflitsch-b19a47259">
             <img src={linkedinIcon} alt="LinkedIn Icon" />
           </a>
         </div>
