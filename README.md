@@ -1,6 +1,29 @@
-Root Variable
+<h2>Root Variable</h2>
 
-Create your color and font css variables!
+<h3>Crie suas variáveis CSS de cor e fonte!</h3>
+
+-- Colors
+
+- Cada item adicionado na primeira e segunda linha terá um peso de cor de 500 + 100 para cada novo item adicionado.
+- Para a terceira linha, os novos itens adicionados terão um nome inicial de accent-1, aumentando conforme o número de novos itens criados.
+- Você pode personalizar qualquer um deles inserindo o nome desejado no campo de entrada.
+- Todos os nomes começarão com "--" por convenção.
+- Os nomes das variáveis não podem começar com números ou caracteres especiais, exceto "-" e "_".
+
+-- Font
+
+- As fontes são inicialmente esperadas em px.
+- Você pode digitá-las em px e clicar no botão "rem" para converter os valores atuais para rem.
+- Se você clicar no botão "rem", as unidades esperadas serão rem; clicando no botão "px" converterá o valor atual para px.
+- Somente números, vírgulas, pontos e espaços são permitidos.
+- Cada número é separado pela vírgula.
+
+Aproveite!
+<hr>
+
+*English Description*
+
+<h3>Create your color and font css variables!</h3>
 
 -- Colors
 
